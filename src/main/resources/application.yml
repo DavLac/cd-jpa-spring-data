@@ -3,6 +3,6 @@ spring:
     hibernate:
       ddl-auto: create-drop
   datasource:
-    url: "jdbc:postgresql://localhost:5432/demo"
+    url: "jdbc:postgresql://localhost:5432/demo_spring_jpa"
     username: postgres
     password: password
