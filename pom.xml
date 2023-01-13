@@ -66,6 +66,16 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>8.5.13</version>
+				<configuration>
+					<url>jdbc:h2:file:./src/main/resources/h2data/database</url>
+					<user>user</user>
+					<password>password</password>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

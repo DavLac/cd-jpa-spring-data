@@ -1,12 +1,13 @@
 spring:
   jpa:
+    defer-datasource-initialization: true
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-    show-sql: true # dumps running queries to standard out
-    properties:
-      hibernate:
-        format_sql: true # prettifies queries
+      #show-sql: true # dumps running queries to standard out
+    #properties:
+      #hibernate:
+    #format_sql: true # prettifies queries
   datasource:
     url: jdbc:h2:file:./src/main/resources/h2data/database
     driverClassName: org.h2.Driver
@@ -16,3 +17,6 @@ spring:
     console:
       enabled: true # If using H2 Database, enable
       path: /h2 # customize H2 database console path
+  sql:
+    init:
+      mode: always
