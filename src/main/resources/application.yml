@@ -2,7 +2,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: true # dumps running queries to standard out
+#    show-sql: true # dumps running queries to standard out
     properties:
       hibernate:
         format_sql: true # prettifies queries

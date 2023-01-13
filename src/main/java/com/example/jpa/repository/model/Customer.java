@@ -4,15 +4,11 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "CUSTOMERS",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "unique_name_and_status", columnNames = {"name", "active"})
-        },
-        indexes = {
-                @Index(name = "customer_name_idx", columnList = "name")
-        })
+@Table(name = "CUSTOMERS")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +17,12 @@ public class Customer {
     private String name;
     private boolean active;
     private Integer age;
-    //@Column(name = "height_in_cm")
     private Integer heightInCm;
 
+    public Customer(String name, boolean active, Integer age, Integer heightInCm) {
+        this.name = name;
+        this.active = active;
+        this.age = age;
+        this.heightInCm = heightInCm;
+    }
 }
