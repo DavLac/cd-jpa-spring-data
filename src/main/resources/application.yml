@@ -2,7 +2,16 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+    show-sql: true # dumps running queries to standard out
+    properties:
+      hibernate:
+        format_sql: true # prettifies queries
   datasource:
-    url: "jdbc:postgresql://localhost:5432/demo"
-    username: postgres
+    url: jdbc:h2:file:./src/main/resources/h2data/database
+    driverClassName: org.h2.Driver
+    username: user
     password: password
+  h2:
+    console:
+      enabled: true # If using H2 Database, enable
+      path: /h2 # customize H2 database console path
