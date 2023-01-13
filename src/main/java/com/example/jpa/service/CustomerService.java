@@ -2,6 +2,7 @@ package com.example.jpa.service;
 
 import com.example.jpa.repository.CustomerRepository;
 import com.example.jpa.repository.model.Customer;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,12 +38,39 @@ public class CustomerService {
         custToBeUpdated.setHeightInCm(customer.getHeightInCm());
         return repository.save(custToBeUpdated);
     }
-    public void deleteById(Long id){
+
+    public void deleteById(Long id) {
         findById(id);
         repository.deleteById(id);
     }
-    public void deleteAll(){
+
+    public void deleteAll() {
         System.out.println("deleting all:");
         repository.deleteAll();
+    }
+
+    public List<Customer> findAllByOrderByHeightInCmDesc() {
+        return repository.findAllByOrderByHeightInCmDesc();
+    }
+
+    public List<Customer> findByActive(Boolean isActive) {
+        return repository.findByActive(isActive);
+    }
+
+    public List<Customer> findFirst2ByName(String name) {
+        return repository.findFirst2ByName(name);
+    }
+
+    public List<Customer> findByNameIn(List<String> name) {
+        return repository.findByNameIn(name);
+    }
+
+    public List<Customer> findByNames(String name1, String name2) {
+        return repository.findByNames(name1, name2);
+    }
+
+    public List<Customer> findAllByPage(int pageNumber, int pageSize) {
+        final Page<Customer> customersPage = repository.findAll(PageRequest.of(pageNumber, pageSize));
+        return customersPage.getContent();
     }
 }
