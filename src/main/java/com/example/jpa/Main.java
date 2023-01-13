@@ -30,14 +30,14 @@ public class Main {
         customers.forEach(customerService::create);
 
         System.out.println("===========================");
-        System.out.println("Names are Paul and John IN");
+        System.out.println("Names are Paul and John JPA-IN");
         customerService.findByNameIn("Paul", "John").forEach(System.out::println);
 
         System.out.println("===========================");
         System.out.println("Names are Paul and John @QUERY");
         customerService.findByNames("Paul", "John").forEach(System.out::println);
 
-        /*System.out.println("===========================");
+        System.out.println("===========================");
         System.out.println("Find all ordered by height");
         customerService.findAllOrderedByHeight().forEach(System.out::println);
 
@@ -76,7 +76,7 @@ public class Main {
         customerService.deleteAll();
         System.out.println("===========================");
         System.out.println("Find all");
-        System.out.println(customerService.findAll());*/
+        System.out.println(customerService.findAll());
     }
 
 }
