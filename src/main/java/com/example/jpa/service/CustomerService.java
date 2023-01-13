@@ -2,8 +2,11 @@ package com.example.jpa.service;
 
 import com.example.jpa.repository.CustomerRepository;
 import com.example.jpa.repository.model.Customer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -43,6 +46,11 @@ public class CustomerService {
         return repository.findAll();
     }
 
+    public List<Customer> findAllByPage(int pageNumber, int pageSize) {
+        final Page<Customer> customersPage = repository.findAll(PageRequest.of(pageNumber, pageSize));
+        return customersPage.getContent();
+    }
+
     public Customer findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -56,6 +64,21 @@ public class CustomerService {
         customerToUpdate.setHeightInCm(customer.getHeightInCm());
 
         return repository.save(customerToUpdate);
+    }
+
+    @Transactional
+    public void everybodyGetOlder() {
+        List<Customer> customers = findAll();
+
+        int failingCounter = 0;
+        for (Customer customer : customers) {
+            if (failingCounter == 2) {
+                throw new RuntimeException("nope");
+            }
+            customer.setAge(customer.getAge() + 1);
+            repository.save(customer);
+            failingCounter++;
+        }
     }
 
     public void deleteById(Long id) {

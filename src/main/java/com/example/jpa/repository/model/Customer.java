@@ -2,6 +2,7 @@ package com.example.jpa.repository.model;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -26,6 +27,9 @@ public class Customer {
 
     @CreatedDate
     private Instant createdDate;
+
+    @LastModifiedDate
+    private Instant lastModifiedDate;
 
     public Customer(String name, boolean active, Integer age, Integer heightInCm) {
         this.name = name;

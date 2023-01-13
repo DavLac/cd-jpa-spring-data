@@ -28,27 +28,6 @@ public class Main {
                 new Customer("Marc", false, 31, 185)
         );
         customers.forEach(customerService::create);
-
-        System.out.println("===========================");
-        System.out.println("Names are Paul and John JPA-IN");
-        customerService.findByNameIn("Paul", "John").forEach(System.out::println);
-
-        System.out.println("===========================");
-        System.out.println("Names are Paul and John @QUERY");
-        customerService.findByNames("Paul", "John").forEach(System.out::println);
-
-        System.out.println("===========================");
-        System.out.println("Find all ordered by height");
-        customerService.findAllOrderedByHeight().forEach(System.out::println);
-
-        System.out.println("===========================");
-        System.out.println("Find all by active");
-        customerService.findAllByActive(true).forEach(System.out::println);
-
-        System.out.println("===========================");
-        System.out.println("Find all top 2 by name = John");
-        customerService.findTop2ByName("John").forEach(System.out::println);
-
         var cust = customerService.create(new Customer("Luigi", true, 36, 190));
 
         System.out.println("===========================");
@@ -77,6 +56,56 @@ public class Main {
         System.out.println("===========================");
         System.out.println("Find all");
         System.out.println(customerService.findAll());
+
+        List<Customer> customers2 = List.of(
+                new Customer("Bob", true, 18, 170),
+                new Customer("Paul", true, 21, 175),
+                new Customer("John", false, 25, 180),
+                new Customer("John", false, 27, 187),
+                new Customer("John", true, 28, 188),
+                new Customer("John", false, 26, 181),
+                new Customer("Marc", false, 31, 185)
+        );
+        customers2.forEach(customerService::create);
+
+        System.out.println("===========================");
+        System.out.println("Names are Paul and John JPA-IN");
+        customerService.findByNameIn("Paul", "John").forEach(System.out::println);
+
+        System.out.println("===========================");
+        System.out.println("Names are Paul and John @QUERY");
+        customerService.findByNames("Paul", "John").forEach(System.out::println);
+
+        System.out.println("===========================");
+        System.out.println("Find all ordered by height");
+        customerService.findAllOrderedByHeight().forEach(System.out::println);
+
+        System.out.println("===========================");
+        System.out.println("Find all by active");
+        customerService.findAllByActive(true).forEach(System.out::println);
+
+        System.out.println("===========================");
+        System.out.println("Find all top 2 by name = John");
+        customerService.findTop2ByName("John").forEach(System.out::println);
+
+        System.out.println("===========================");
+        System.out.println("Find all by page 0 - size = 3");
+        customerService.findAllByPage(0, 3).forEach(System.out::println);
+        System.out.println("===========================");
+        System.out.println("Find all by page 1 - size = 3");
+        customerService.findAllByPage(1, 3).forEach(System.out::println);
+
+        System.out.println("===========================");
+        System.out.println("Find all before transaction");
+        customerService.findAll().forEach(System.out::println);
+        System.out.println("===========================");
+        System.out.println("Let's get older");
+        try{
+            customerService.everybodyGetOlder();
+        } catch (Exception ex) {
+            System.out.println("Error during transaction");
+        }
+        customerService.findAll().forEach(System.out::println);
     }
 
 }
